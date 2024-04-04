@@ -1,0 +1,37 @@
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+dependencies {
+    //noinspection VulnerableLibrariesLocal
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:5.10.0",
+            "com.codeborne:selenide:7.2.1"
+    )
+}
+
+test {
+    useJUnitPlatform {
+        excludeTags 'slow'
+    }
+}
+
+task slowTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'slow'
+    }
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
