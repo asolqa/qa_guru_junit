@@ -10,9 +10,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class WikiPage {
     private final SelenideElement toolBar = $(".vector-page-toolbar");
-    String langButton = "#js-link-box-";
-
-
+    private static final String LANG_BUTTON = "#js-link-box-";
 
     public WikiPage openPage() {
         open("https://wikipedia.org/");
@@ -20,7 +18,7 @@ public class WikiPage {
     }
 
     public WikiPage selectLanguage(String language) {
-        $(langButton + language).click();
+        $(LANG_BUTTON + language).click();
         return this;
     }
 

@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Selenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,19 +12,21 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class SimpleWikiTest {
 
+    @AfterEach
+    void clearEnv() {
+        Selenide.closeWebDriver();
+    }
+
     @Tag("Smoke")
     @ParameterizedTest
     @ValueSource(strings = {"Гагарин", "Чайковский"})
     @DisplayName("Страница содержит в меню несколько инструментов на выбор")
     void wikiVariousSearchTest(String searchString) {
-
         open("https://wikipedia.org/");
 
         $("#searchInput").setValue(searchString).pressEnter();
         $("#vector-page-tools-dropdown-checkbox").click();
         $$(".vector-menu-content-list").shouldBe(sizeGreaterThan(5));
-
-        Selenide.closeWebDriver();
 
     }
 }

@@ -11,8 +11,6 @@ import pages.WikiPage;
 
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Selenide.sleep;
-
 public class WikiToolBarTest {
 
     @AfterEach
@@ -21,6 +19,7 @@ public class WikiToolBarTest {
         Selenide.closeWebDriver();
     }
 
+    @Tag("Regression")
     @ParameterizedTest
     @MethodSource("wikiTestData")
     @DisplayName("Панель инструментов отображается на выбранном языке")
@@ -35,8 +34,8 @@ public class WikiToolBarTest {
 
     static Stream<Arguments> wikiTestData() {
         return Stream.of(
-        Arguments.of(WikiToolBarData.englishToolbar()),
-        Arguments.of(WikiToolBarData.spanishToolbar())
+                Arguments.of(WikiToolBarData.englishToolbar()),
+                Arguments.of(WikiToolBarData.spanishToolbar())
         );
     }
 }

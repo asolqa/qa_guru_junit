@@ -19,13 +19,25 @@ dependencies {
 
 test {
     useJUnitPlatform {
-        excludeTags 'slow'
+        excludeTags 'slow', 'Smoke', 'Regression'
     }
 }
 
-task slowTest(type: Test) {
+tasks.register('slowTests', Test) {
     useJUnitPlatform {
         includeTags 'slow'
+    }
+}
+
+tasks.register('smokeTests', Test) {
+    useJUnitPlatform {
+        includeTags 'Smoke'
+    }
+}
+
+tasks.register('regression', Test) {
+    useJUnitPlatform {
+        includeTags 'Regression'
     }
 }
 
